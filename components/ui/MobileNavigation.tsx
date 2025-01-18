@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -16,6 +15,7 @@ import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
 import FileUploader from "@/components/ui/FileUploader";
 import { Button } from "@/components/ui/button";
+import { signOutUser } from "@/lib/Actions/user.actions";
 
 interface Props {
   ownerID: string;
@@ -100,7 +100,13 @@ const MobileNavigation = ({
             <Separator className="my-5 bg-light-200/20" />
             <div className="flex flex-col justify-between gap-5 pb-5">
               <FileUploader ownerId={ownerId} accountId={accountId} />
-              <Button type="submit" className="mobile-sign-out-button">
+              <Button
+                type="submit"
+                className="mobile-sign-out-button"
+                onClick={async () => {
+                  await signOutUser();
+                }}
+              >
                 <Image
                   src="/assets/icons/logout.svg"
                   alt="logo"
